@@ -1,0 +1,13 @@
+name: Hello World Test
+
+on:
+  push:
+    branches: [ main ]  # Runs when you push to main
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello
+        run: echo "🎉 Hello from GitHub Actions!"
