@@ -6,6 +6,6 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps('hello from NK2 hihihi')             
+        'body': json.dumps('hello from NK2 automatic lamba update from github')             
            
     }
