@@ -5,6 +5,8 @@ import pymysql
 
 def lambda_handler(event, context):
     try:
+        print("Trying to connect to:", os.environ['DB_HOST'])
+        
         connection = pymysql.connect(
             host=os.environ['DB_HOST'],
             user=os.environ['DB_USER'],
