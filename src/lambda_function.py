@@ -3,11 +3,12 @@ import os
 import json
 import pymysql
 
-def lambda_handler(event, context):
-    try:
-        print("Trying to connect to:", os.environ['DB_HOST'])
-        
-        connection = pymysql.connect(
+conn = None
+
+def get_connection():
+    global conn
+    if conn is None or not conn.open:
+        conn = pymysql.connect(
             host=os.environ['DB_HOST'],
             user=os.environ['DB_USER'],
             password=os.environ['DB_PASS'],
@@ -15,6 +16,13 @@ def lambda_handler(event, context):
             port=int(os.environ.get('DB_PORT', 3306)),
             connect_timeout=5
         )
+    return conn
+
+def lambda_handler(event, context):
+    try:
+        print("Trying to connect to:", os.environ['DB_HOST'])
+        
+        connection = get_connection()
         if connection:
                 sns = boto3.client('sns')
                 sns.publish(
