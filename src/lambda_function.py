@@ -22,18 +22,18 @@ def lambda_handler(event, context):
     try:
         print("Trying to connect to:", os.environ['DB_HOST'])
         
-        connection = get_connection()
-        if connection:
-                sns = boto3.client('sns')
-                sns.publish(
-                    TopicArn = 'arn:aws:sns:us-east-1:825765396866:QMPTableUpdateAlert',
-                    Message = 'NK Test sns from Lambda Message',
-                    Subject = 'NK TEst SNS from Lambda subject'
-                )
-                connection.close()
+        # connection = get_connection()
+        # if connection:
+        #         sns = boto3.client('sns')
+        #         sns.publish(
+        #             TopicArn = 'arn:aws:sns:us-east-1:825765396866:QMPTableUpdateAlert',
+        #             Message = 'NK Test sns from Lambda Message',
+        #             Subject = 'NK TEst SNS from Lambda subject'
+        #         )
+        #         connection.close()
         return {
             'statusCode': 200,
-            'body': json.dumps('✅ Connection to MySQL successful')
+            'body': json.dumps('✅ initial print helloworld')
         }
 
     except Exception as e:
