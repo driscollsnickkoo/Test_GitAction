@@ -23,14 +23,16 @@ sns_client = boto3.client('sns')
 def lambda_handler(event, context):
     try:
         topic_arn = os.environ['SNS_TOPIC_ARN']
-        message = {
-            "default": "Hello from Lambda via SNS!"
-            }
-        print(f'NK Testing sns arn{topic_arn} and message: {message}')
+
+        sns_client.publish(
+                    TopicArn = 'arn:aws:sns:us-east-1:825765396866:QMPTableUpdateAlert',
+                    Message = 'NK Test sns from Lambda Message',
+                    Subject = 'NK TEst SNS from Lambda subject'
+                )
 
         response = sns_client.publish(
             TopicArn=topic_arn,
-            Message=json.dumps(message),
+            Message=json.dumps('sns sent'),
             MessageStructure='json'
         )
 
