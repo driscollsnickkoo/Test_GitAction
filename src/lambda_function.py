@@ -5,9 +5,11 @@ sns_client = boto3.client('sns')
 
 def lambda_handler(event, context):
     try:
+        key1 = event['key1'].read()
+
         response = sns_client.publish(
             TopicArn='arn:aws:sns:us-east-1:825765396866:QMPTableUpdateAlert',
-            Message='NK Test sns from Lambda Message',
+            Message=f'NK Test sns from Lambda Message with key1 : {key1}',
             Subject='NK Test SNS from Lambda subject'
         )
 
@@ -22,5 +24,5 @@ def lambda_handler(event, context):
     except Exception as e:
         return {
             'statusCode': 500,
-            'body': json.dumps(f'❌ Connection failed: {str(e)}')
+            'body': json.dumps(f'❌ NK lambda NK_helloworld_SNS Failed: {str(e)}')
         }
