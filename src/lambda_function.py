@@ -5,7 +5,7 @@ sns_client = boto3.client('sns')
 
 def lambda_handler(event, context):
     try:
-        key1 = event['key1'].read()
+        key1 = event['key1']
 
         response = sns_client.publish(
             TopicArn='arn:aws:sns:us-east-1:825765396866:QMPTableUpdateAlert',
